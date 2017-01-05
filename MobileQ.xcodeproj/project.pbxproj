@@ -14,8 +14,10 @@
 		2C22D49F1E1C52DA0048C9E0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C22D49D1E1C52DA0048C9E0 /* LaunchScreen.storyboard */; };
 		2C22D4A71E1C65470048C9E0 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C22D4A61E1C65470048C9E0 /* LoginViewController.swift */; };
 		2C22D4A91E1C65560048C9E0 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C22D4A81E1C65560048C9E0 /* RegisterViewController.swift */; };
-		2C22D4AB1E1C6AD60048C9E0 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C22D4AA1E1C6AD60048C9E0 /* GoogleService-Info.plist */; };
 		2C22D4AD1E1C73960048C9E0 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C22D4AC1E1C73960048C9E0 /* AppState.swift */; };
+		2CF0A6841E1D841D0061E74B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2CF0A6831E1D841D0061E74B /* GoogleService-Info.plist */; };
+		2CF0A6861E1DD5870061E74B /* checkbox.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CF0A6851E1DD5870061E74B /* checkbox.png */; };
+		2CF0A6881E1DD5940061E74B /* checkbox-pressed.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CF0A6871E1DD5940061E74B /* checkbox-pressed.png */; };
 		8B538EF60A34EE6D27137BFF /* Pods_MobileQ.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CCAC0DF501124DB8AABE6663 /* Pods_MobileQ.framework */; };
 /* End PBXBuildFile section */
 
@@ -29,8 +31,10 @@
 		2C22D4A01E1C52DA0048C9E0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2C22D4A61E1C65470048C9E0 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		2C22D4A81E1C65560048C9E0 /* RegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
-		2C22D4AA1E1C6AD60048C9E0 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		2C22D4AC1E1C73960048C9E0 /* AppState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
+		2CF0A6831E1D841D0061E74B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		2CF0A6851E1DD5870061E74B /* checkbox.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = checkbox.png; sourceTree = "<group>"; };
+		2CF0A6871E1DD5940061E74B /* checkbox-pressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "checkbox-pressed.png"; sourceTree = "<group>"; };
 		8BC4749F492864221E4B5BF7 /* Pods-MobileQ.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MobileQ.release.xcconfig"; path = "Pods/Target Support Files/Pods-MobileQ/Pods-MobileQ.release.xcconfig"; sourceTree = "<group>"; };
 		902B7B25FD3E753C6EE3FD8F /* Pods-MobileQ.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MobileQ.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MobileQ/Pods-MobileQ.debug.xcconfig"; sourceTree = "<group>"; };
 		CCAC0DF501124DB8AABE6663 /* Pods_MobileQ.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MobileQ.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -76,8 +80,10 @@
 				2C22D4AC1E1C73960048C9E0 /* AppState.swift */,
 				2C22D4A81E1C65560048C9E0 /* RegisterViewController.swift */,
 				2C22D49B1E1C52DA0048C9E0 /* Assets.xcassets */,
-				2C22D4AA1E1C6AD60048C9E0 /* GoogleService-Info.plist */,
+				2CF0A6831E1D841D0061E74B /* GoogleService-Info.plist */,
 				2C22D49D1E1C52DA0048C9E0 /* LaunchScreen.storyboard */,
+				2CF0A6851E1DD5870061E74B /* checkbox.png */,
+				2CF0A6871E1DD5940061E74B /* checkbox-pressed.png */,
 				2C22D4A01E1C52DA0048C9E0 /* Info.plist */,
 			);
 			path = MobileQ;
@@ -163,10 +169,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2C22D4AB1E1C6AD60048C9E0 /* GoogleService-Info.plist in Resources */,
+				2CF0A6861E1DD5870061E74B /* checkbox.png in Resources */,
 				2C22D49F1E1C52DA0048C9E0 /* LaunchScreen.storyboard in Resources */,
+				2CF0A6841E1D841D0061E74B /* GoogleService-Info.plist in Resources */,
 				2C22D49C1E1C52DA0048C9E0 /* Assets.xcassets in Resources */,
 				2C22D49A1E1C52DA0048C9E0 /* Main.storyboard in Resources */,
+				2CF0A6881E1DD5940061E74B /* checkbox-pressed.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

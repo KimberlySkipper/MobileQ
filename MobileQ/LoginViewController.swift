@@ -24,6 +24,17 @@ class LoginViewController: UIViewController
 
         // Do any additional setup after loading the view.
     }
+    
+    override func viewDidAppear(_ animated: Bool)
+    {
+        // must call super with this method
+        super.viewDidAppear(animated)
+        if let user = FIRAuth.auth()?.currentUser
+        {
+            // view will come up and dissappear right away. not idea but less complicated for now.
+            userIsLoggedIn(user)
+        }
+    }
 
     override func didReceiveMemoryWarning()
     {
@@ -57,11 +68,27 @@ class LoginViewController: UIViewController
         performSegue(withIdentifier: "ModalRegisterSegue", sender: self)
    }
     
+    //MARK: - Helper Functions
     
+    fileprivate func setDisplayName(_ user: FIRUser)
+    {
+        let changeRequest = user.profileChangeRequest()
+        changeRequest.displayName = user.email!.components(separatedBy: "@")[0]
+        changeRequest.commitChanges() {
+            error in
+            if let error = error
+            {
+                print(error.localizedDescription)
+                return
+            }
+            let currentUser = (FIRAuth.auth()?.currentUser!)!
+            self.userIsLoggedIn(currentUser)
+        }
+    }
 
-
-
-    func userIsLoggedIn(_ user: FIRUser)
+    
+    
+    fileprivate func userIsLoggedIn(_ user: FIRUser)
     {
         AppState.sharedInstance.signedIn = true
         AppState.sharedInstance.displayName = user.displayName ?? user.email
