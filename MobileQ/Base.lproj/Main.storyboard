@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -21,46 +22,52 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="PEX-Xl-DbX">
-                                <rect key="frame" x="60" y="629" width="251" height="30"/>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                                <connections>
-                                    <outlet property="delegate" destination="BYZ-38-t0r" id="hxt-Ja-Ayb"/>
-                                </connections>
-                            </textField>
-                            <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="itj-of-czO">
-                                <rect key="frame" x="319" y="629" width="36" height="30"/>
-                                <state key="normal" title="Send"/>
-                                <connections>
-                                    <action selector="sendButtonWasTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="B0Y-M1-dFP"/>
-                                </connections>
-                            </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="TRL-32-0IY">
-                                <rect key="frame" x="0.0" y="64" width="375" height="557"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="QueueCell" textLabel="3Tn-SI-0Dt" imageView="RAR-TM-rxi" style="IBUITableViewCellStyleDefault" id="lNm-RM-aJ0">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="QueueCell" id="lNm-RM-aJ0" customClass="QueueTableViewCell" customModule="MobileQ" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="lNm-RM-aJ0" id="mnf-cN-5z8">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="3Tn-SI-0Dt">
-                                                    <rect key="frame" x="46" y="0.0" width="314" height="43"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OYi-2s-umG">
+                                                    <rect key="frame" x="20" y="9" width="89" height="32"/>
+                                                    <state key="normal" title="Button" image="unchecked box.png"/>
+                                                </button>
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="jS0-3T-o7p">
+                                                    <rect key="frame" x="174" y="10" width="193" height="30"/>
+                                                    <nil key="textColor"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits"/>
+                                                    <connections>
+                                                        <outlet property="delegate" destination="BYZ-38-t0r" id="h3F-qI-1WV"/>
+                                                    </connections>
+                                                </textField>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lPW-M3-7Zb">
+                                                    <rect key="frame" x="119" y="14.5" width="45" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="checkbox.png" id="RAR-TM-rxi">
-                                                    <rect key="frame" x="15" y="13" width="16" height="16"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                </imageView>
                                             </subviews>
+                                            <constraints>
+                                                <constraint firstItem="OYi-2s-umG" firstAttribute="leading" secondItem="mnf-cN-5z8" secondAttribute="leading" constant="20" id="MP7-rF-YU1"/>
+                                                <constraint firstItem="jS0-3T-o7p" firstAttribute="leading" secondItem="lPW-M3-7Zb" secondAttribute="trailing" constant="10" id="OnH-9P-KgO"/>
+                                                <constraint firstItem="OYi-2s-umG" firstAttribute="centerY" secondItem="lPW-M3-7Zb" secondAttribute="centerY" id="U8u-9h-1mP"/>
+                                                <constraint firstAttribute="trailing" secondItem="jS0-3T-o7p" secondAttribute="trailing" constant="8" id="VDT-by-kVM"/>
+                                                <constraint firstAttribute="bottom" secondItem="lPW-M3-7Zb" secondAttribute="bottom" constant="8" id="VXC-fo-Ggj"/>
+                                                <constraint firstItem="lPW-M3-7Zb" firstAttribute="centerY" secondItem="jS0-3T-o7p" secondAttribute="centerY" id="YAv-cV-fAs"/>
+                                                <constraint firstItem="lPW-M3-7Zb" firstAttribute="leading" secondItem="OYi-2s-umG" secondAttribute="trailing" constant="10" id="cYx-fQ-BEB"/>
+                                            </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="checkboxButton" destination="OYi-2s-umG" id="eTc-bF-GMT"/>
+                                            <outlet property="nameLabel" destination="lPW-M3-7Zb" id="TCs-eS-tPD"/>
+                                            <outlet property="subjectTextField" destination="jS0-3T-o7p" id="cra-3d-PAz"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
@@ -68,40 +75,34 @@
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="erY-m1-M8J"/>
                                 </connections>
                             </tableView>
-                            <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7iA-MK-2GF">
-                                <rect key="frame" x="20" y="629" width="32" height="30"/>
-                                <state key="normal" title="Hide"/>
-                                <connections>
-                                    <action selector="hideKeyboardButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="gCl-po-UV4"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="7iA-MK-2GF" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="20" id="4x7-zU-pBV"/>
-                            <constraint firstItem="PEX-Xl-DbX" firstAttribute="leading" secondItem="7iA-MK-2GF" secondAttribute="trailing" constant="8" id="F1p-UR-tZl"/>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="PEX-Xl-DbX" secondAttribute="bottom" constant="8" id="Gl7-Nd-CSF"/>
-                            <constraint firstItem="PEX-Xl-DbX" firstAttribute="top" secondItem="TRL-32-0IY" secondAttribute="bottom" constant="8" id="Gpm-ZM-5eS"/>
-                            <constraint firstItem="itj-of-czO" firstAttribute="leading" secondItem="PEX-Xl-DbX" secondAttribute="trailing" constant="8" id="I4u-IZ-438"/>
-                            <constraint firstItem="PEX-Xl-DbX" firstAttribute="centerY" secondItem="itj-of-czO" secondAttribute="centerY" id="PDa-0V-QHC"/>
                             <constraint firstItem="TRL-32-0IY" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="coG-Vj-Vxq"/>
-                            <constraint firstAttribute="trailing" secondItem="itj-of-czO" secondAttribute="trailing" constant="20" id="d8q-ZR-UVC"/>
+                            <constraint firstItem="TRL-32-0IY" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="fZN-t5-hjX"/>
                             <constraint firstAttribute="trailing" secondItem="TRL-32-0IY" secondAttribute="trailing" id="oMA-a8-ac8"/>
-                            <constraint firstItem="TRL-32-0IY" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="pXL-hg-mYJ"/>
-                            <constraint firstItem="PEX-Xl-DbX" firstAttribute="centerY" secondItem="7iA-MK-2GF" secondAttribute="centerY" id="xiz-Pd-CFk"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="TRL-32-0IY" secondAttribute="bottom" id="y3k-tS-qzV"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="BLk-cX-XfG"/>
+                    <navigationItem key="navigationItem" id="BLk-cX-XfG">
+                        <barButtonItem key="leftBarButtonItem" systemItem="add" id="lyS-MN-M0P">
+                            <connections>
+                                <action selector="addRequestToList:" destination="BYZ-38-t0r" id="wew-5s-IfH"/>
+                            </connections>
+                        </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem systemItem="edit" id="UqL-Gu-wzh"/>
+                            <barButtonItem title="Log Out" id="ZvP-M4-eLN"/>
+                        </rightBarButtonItems>
+                    </navigationItem>
                     <connections>
-                        <outlet property="questionTextFieldConstraint" destination="Gl7-Nd-CSF" id="duv-PQ-Xkw"/>
-                        <outlet property="subjectTextField" destination="PEX-Xl-DbX" id="REI-jE-Vvx"/>
                         <outlet property="tableView" destination="TRL-32-0IY" id="rTi-iW-C0B"/>
                         <segue destination="JyN-nS-MN6" kind="presentation" identifier="ModalLoginSeque" id="Lb7-R8-3H6"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="820" y="44.527736131934034"/>
+            <point key="canvasLocation" x="818.39999999999998" y="43.628185907046479"/>
         </scene>
         <!--Login View Controller-->
         <scene sceneID="pRs-oI-hGi">
@@ -274,6 +275,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="checkbox.png" width="16" height="16"/>
+        <image name="unchecked box.png" width="35" height="32"/>
     </resources>
 </document>

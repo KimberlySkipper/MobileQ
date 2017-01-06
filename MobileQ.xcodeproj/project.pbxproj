@@ -26,6 +26,7 @@
 		2CF0A6991E1EC5600061E74B /* Logo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CF0A6901E1EC5600061E74B /* Logo@2x.png */; };
 		2CF0A69A1E1EC5600061E74B /* Logo@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CF0A6911E1EC5600061E74B /* Logo@3x.png */; };
 		2CF0A69C1E1EC7800061E74B /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF0A69B1E1EC7800061E74B /* Request.swift */; };
+		2CF0A6A01E2007AB0061E74B /* QueueTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF0A69F1E2007AB0061E74B /* QueueTableViewCell.swift */; };
 		8B538EF60A34EE6D27137BFF /* Pods_MobileQ.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CCAC0DF501124DB8AABE6663 /* Pods_MobileQ.framework */; };
 /* End PBXBuildFile section */
 
@@ -51,6 +52,7 @@
 		2CF0A6901E1EC5600061E74B /* Logo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Logo@2x.png"; sourceTree = "<group>"; };
 		2CF0A6911E1EC5600061E74B /* Logo@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Logo@3x.png"; sourceTree = "<group>"; };
 		2CF0A69B1E1EC7800061E74B /* Request.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
+		2CF0A69F1E2007AB0061E74B /* QueueTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QueueTableViewCell.swift; sourceTree = "<group>"; };
 		8BC4749F492864221E4B5BF7 /* Pods-MobileQ.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MobileQ.release.xcconfig"; path = "Pods/Target Support Files/Pods-MobileQ/Pods-MobileQ.release.xcconfig"; sourceTree = "<group>"; };
 		902B7B25FD3E753C6EE3FD8F /* Pods-MobileQ.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MobileQ.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MobileQ/Pods-MobileQ.debug.xcconfig"; sourceTree = "<group>"; };
 		CCAC0DF501124DB8AABE6663 /* Pods_MobileQ.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MobileQ.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -90,12 +92,10 @@
 			isa = PBXGroup;
 			children = (
 				2C22D4941E1C52DA0048C9E0 /* AppDelegate.swift */,
-				2CF0A69B1E1EC7800061E74B /* Request.swift */,
-				2C22D4961E1C52DA0048C9E0 /* QueueViewController.swift */,
-				2C22D4981E1C52DA0048C9E0 /* Main.storyboard */,
-				2C22D4A61E1C65470048C9E0 /* LoginViewController.swift */,
 				2C22D4AC1E1C73960048C9E0 /* AppState.swift */,
-				2C22D4A81E1C65560048C9E0 /* RegisterViewController.swift */,
+				2CD17A371E2042DC00109EDA /* Models */,
+				2CD17A361E2042C400109EDA /* View Contollers */,
+				2C22D4981E1C52DA0048C9E0 /* Main.storyboard */,
 				2C22D49B1E1C52DA0048C9E0 /* Assets.xcassets */,
 				2CF0A6891E1EC5600061E74B /* boxchecked@1x.png */,
 				2CF0A68A1E1EC5600061E74B /* boxchecked@2x.png */,
@@ -111,6 +111,25 @@
 				2C22D4A01E1C52DA0048C9E0 /* Info.plist */,
 			);
 			path = MobileQ;
+			sourceTree = "<group>";
+		};
+		2CD17A361E2042C400109EDA /* View Contollers */ = {
+			isa = PBXGroup;
+			children = (
+				2C22D4961E1C52DA0048C9E0 /* QueueViewController.swift */,
+				2CF0A69F1E2007AB0061E74B /* QueueTableViewCell.swift */,
+				2C22D4A61E1C65470048C9E0 /* LoginViewController.swift */,
+				2C22D4A81E1C65560048C9E0 /* RegisterViewController.swift */,
+			);
+			name = "View Contollers";
+			sourceTree = "<group>";
+		};
+		2CD17A371E2042DC00109EDA /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				2CF0A69B1E1EC7800061E74B /* Request.swift */,
+			);
+			name = Models;
 			sourceTree = "<group>";
 		};
 		379CF73EABE326491E6366D6 /* Pods */ = {
@@ -270,6 +289,7 @@
 				2C22D4971E1C52DA0048C9E0 /* QueueViewController.swift in Sources */,
 				2C22D4951E1C52DA0048C9E0 /* AppDelegate.swift in Sources */,
 				2C22D4A91E1C65560048C9E0 /* RegisterViewController.swift in Sources */,
+				2CF0A6A01E2007AB0061E74B /* QueueTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

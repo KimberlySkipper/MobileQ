@@ -7,19 +7,26 @@
 //
 
 import Foundation
+import Firebase
 
 class Request
 {
-    let name: String
-    let subject: String
-    let description: String
-    let done: Bool
+    var name: String?
+//    var subject: String?
+    var description: String?
+    var done: Bool?
+    
+    var dbRef: FIRDatabaseReference!
 
 
+    init()
+    {
+    }
+    
     init(studentName: String, subject: String, question: String, status: Bool )
     {
         self.name = studentName
-        self.subject = subject
+//        self.subject = subject
         self.description = question
         self.done = status
     }
@@ -37,6 +44,14 @@ class Request
     }
     return request
     
+    }
+    
+    func sendToFirebase()
+    {
+        dbRef = FIRDatabase.database().reference()
+        
+        let questionData: [String: Any] = ["name": name!, "subject": description!, "status": false]
+        dbRef.child("requests").childByAutoId().setValue(questionData)
     }
 
 }//end class
