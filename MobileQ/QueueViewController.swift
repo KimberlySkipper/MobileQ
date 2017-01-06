@@ -28,6 +28,8 @@ class QueueViewController: UIViewController, UITableViewDelegate, UITableViewDat
         
         NotificationCenter.default.addObserver(self, selector: #selector (keyboardWillShow(_:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardDidHide(_:)), name: NSNotification.Name.UIKeyboardDidHide, object: nil)
+        
         
     }
     
@@ -47,10 +49,15 @@ class QueueViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     //MARK: - Firebase methods
     
+    deinit
+    {
+        self.dbRef.child("question").removeObserver(withHandle: refHandle)
+    }
+    
     func configureDatabase()
     {
         dbRef = FIRDatabase.database().reference()
-        refHandle = dbRef.child("messages").observe(.childAdded, with: {(snapshot) -> Void in
+        refHandle = dbRef.child("questions").observe(.childAdded, with: {(snapshot) -> Void in
             //must use self. in closure
             self.questions.append(snapshot)
             let indexPath = IndexPath(row: self.questions.count - 1, section: 0)
@@ -59,6 +66,7 @@ class QueueViewController: UIViewController, UITableViewDelegate, UITableViewDat
             self.tableView.scrollToRow(at: indexPath, at: .bottom, animated: true)
         })
     }
+    //add func FIRDataEventTypeChildRemoved for student to be able to remove from Queue
     
     //MARK: - table view data source
 
@@ -76,11 +84,13 @@ class QueueViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "ChatCell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "QueueCell", for: indexPath)
         
         let questionSnapshot = questions[indexPath.row]
         let question = questionSnapshot.value as! Dictionary<String, String>
-        if let name =  question["name"], let subject = question["subject"]
+        if let name =  question["name"],let subject = question["subject"]
+           // let description = question["description"],
+           // let status = question["status"]
         {
             cell.textLabel?.text = ("\(name): \(subject)")
            
@@ -92,7 +102,8 @@ class QueueViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     //MARK: - Helper Functions
     
-    func keyboardWillShow(_ notification: Notification) {
+    func keyboardWillShow(_ notification: Notification)
+    {
         let height = ((notification.userInfo![UIKeyboardFrameEndUserInfoKey] as! NSValue) .cgRectValue.height) + 4
         questionTextFieldConstraint.constant = height
     }
@@ -101,7 +112,7 @@ class QueueViewController: UIViewController, UITableViewDelegate, UITableViewDat
         questionTextFieldConstraint.constant = 8.0
     }
     
-    func sendMessage()
+    func sendRequest()
     {
         if let question = subjectTextField.text
         {
@@ -110,20 +121,26 @@ class QueueViewController: UIViewController, UITableViewDelegate, UITableViewDat
                 let questionData = ["subject": question, "name": username]
                 dbRef.child("questions").childByAutoId().setValue(questionData)
                 subjectTextField.text = ""
+                }
             }
         }
         
-    }
+    
 
     
     //MARK - Action Handlers
     
-    @IBAction func sendButtonWasTapped(_ sender: UIButton){
-        sendMessage()
+    @IBAction func sendButtonWasTapped(_ sender: UIButton)
+    {
+        //create request object
+        sendRequest()
+        
     }
     
-    @IBAction func hideKeyboardButton(_ sender: UIButton) {
-        if subjectTextField.isFirstResponder {
+    @IBAction func hideKeyboardButton(_ sender: UIButton)
+    {
+        if subjectTextField.isFirstResponder
+        {
             subjectTextField.resignFirstResponder()
         }
     }
