@@ -15,6 +15,7 @@ class Request
 //    var subject: String?
     var description: String?
     var done: Bool?
+    var key: String?
     
     var dbRef: FIRDatabaseReference!
 
@@ -23,7 +24,7 @@ class Request
     {
     }
     
-    init(studentName: String, subject: String, question: String, status: Bool )
+    init(studentName: String, question: String, status: Bool )
     {
         self.name = studentName
 //        self.subject = subject
@@ -37,23 +38,37 @@ class Request
     if aDictionaryMadeFromFBDatabase.count > 0
     {
         let name = aDictionaryMadeFromFBDatabase["name"] as? String ?? ""
-        let subject = aDictionaryMadeFromFBDatabase["subject"] as? String ?? ""
-        let description = aDictionaryMadeFromFBDatabase["description"] as? String ?? ""
+        //let subject = aDictionaryMadeFromFBDatabase["subject"] as? String ?? ""
+        let description = aDictionaryMadeFromFBDatabase["subject"] as? String ?? ""
         let done = aDictionaryMadeFromFBDatabase["status"] as? Bool
-        request = Request(studentName: name, subject: subject, question: description, status: done!)
+        request = Request(studentName: name, question: description, status: done!)
     }
     return request
     
     }
     
+    
     func sendToFirebase()
     {
         dbRef = FIRDatabase.database().reference()
         
-        let questionData: [String: Any] = ["name": name!, "subject": description!, "status": false]
+        let questionData: [String: Any] = ["name": name!, "subject": description ?? "", "status": done ?? false]
         dbRef.child("requests").childByAutoId().setValue(questionData)
     }
-
+    
+    func sendEditToFirebase()
+    {
+        dbRef = FIRDatabase.database().reference()
+        
+        let questionData: [String: Any] = ["name": name!, "subject": description!, "status": done ?? false]
+        dbRef.child("requests").child(key!).setValue(questionData)
+    }
+    
+    func deleteFromFirebase()
+    {
+        dbRef = FIRDatabase.database().reference()
+        dbRef.child("requests").child(key!).removeValue()
+    }
 }//end class
 
 

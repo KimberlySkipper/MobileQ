@@ -27,7 +27,6 @@ class QueueViewController: UIViewController, UITableViewDelegate, UITableViewDat
         title = "Mobile Q"
         
         configureDatabase()
-        
 // NotificationCenter.default.addObserver(self, selector: #selector (keyboardWillShow(_:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
 //
 //        NotificationCenter.default.addObserver(self, selector: #selector(keyboardDidHide(_:)), name: NSNotification.Name.UIKeyboardDidHide, object: nil)
@@ -41,6 +40,8 @@ class QueueViewController: UIViewController, UITableViewDelegate, UITableViewDat
         {
             performSegue(withIdentifier: "ModalLoginSeque", sender: self)
         }
+        tableView.reloadData()
+
     }
 
     override func didReceiveMemoryWarning()
@@ -58,17 +59,21 @@ class QueueViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     func configureDatabase()
     {
+        
         dbRef = FIRDatabase.database().reference()
-//        refHandle = dbRef.child("requests").observe(.childAdded, with: {(snapshot) -> Void in
-//            //must use self. in closure
-////            self.requests.append(snapshot)
-//            let indexPath = IndexPath(row: self.requests.count - 1, section: 0)
-//            // what does this line mean
-//            self.tableView.insertRows(at: [indexPath], with: .automatic)
-//            self.tableView.scrollToRow(at: indexPath, at: .bottom, animated: true)
-//        })
+        refHandle = dbRef.child("requests").observe(.childAdded, with: {(snapshot) -> Void in
+           // print(snapshot.value)
+           //must use self. in closure
+            let req = Request.createRequestFromJsonDictionary(snapshot.value as! [String : Any])
+            req?.key = snapshot.key
+            self.requests.append(req!)
+        let indexPath = IndexPath(row: self.requests.count - 1, section: 0)
+        self.tableView.insertRows(at: [indexPath], with: .automatic)
+        self.tableView.scrollToRow(at: indexPath, at: .bottom, animated: true)
+      })
+        
     }
-    //add func FIRDataEventTypeChildRemoved for student to be able to remove from Queue
+    
     
     //MARK: - table view data source
 
@@ -87,24 +92,49 @@ class QueueViewController: UIViewController, UITableViewDelegate, UITableViewDat
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
         let cell = tableView.dequeueReusableCell(withIdentifier: "QueueCell", for: indexPath) as! QueueTableViewCell
-        
+        //let requestSnapshot: FIRDataSnapshot! = requests[indexPath.row]
+        //let question = requestSnapshot.value as! Dictionary<String, Any>
         let aRequest = requests[indexPath.row]
+        
         if let description = aRequest.description, let name = aRequest.name
         {
             cell.subjectTextField.text = ("\(description)")
             cell.nameLabel.text = ("\(name)")
+            if description.isEmpty
+            {
+                cell.subjectTextField.becomeFirstResponder()
+            }
         }
-        else
-        {
-            aRequest.name = AppState.sharedInstance.displayName!
-            cell.subjectTextField.becomeFirstResponder()
-        }
+
+
+        
 //        let question = requestSnapshot.value as! Dictionary<String, Any>
 //        if let name =  question["name"] as? String, let subject = question["subject"] as? String, let status = question["status"] as? Bool
            // let description = question["description"],
            // let status = question["status"]
         return cell
     }
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        // Return false if you do not want the specified item to be editable.
+        return true
+    }
+    
+    //FIXME: deleting cell func not working
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath)
+    {
+        if editingStyle == .delete
+        {
+            
+            //let aRequest = requests[indexPath.row]
+            requests.remove(at: indexPath.row).deleteFromFirebase()
+            tableView.deleteRows(at: [indexPath], with: .fade)
+        }
+    }
+
+
+    
+    
     
     //MARK: - Text Field Delegate
     
@@ -122,8 +152,8 @@ class QueueViewController: UIViewController, UITableViewDelegate, UITableViewDat
             textField.resignFirstResponder()
             
 //            let questionData = ["name": username!, "subject": question!, "status": false] as [String: Any]
-        
-            aRequest.sendToFirebase()
+           // requests.remove(at: indexPath.row)
+            aRequest.sendEditToFirebase()
             //subjectTextField.text = ""
             
             
@@ -166,9 +196,12 @@ class QueueViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     @IBAction func addRequestToList(_ sender: UIBarButtonItem)
     {
-        let newRequest = Request()
-        requests.append(newRequest)
+       let newRequest = Request()
+        newRequest.description = "";
+        newRequest.name = AppState.sharedInstance.displayName
+        newRequest.sendToFirebase()
         tableView.reloadData()
+        //tableView.insertRows(at: [IndexPath(row: requests.count - 1, section: 0)], with: .automatic)
 //        if let subject = subjectTextField.text
 //        {
 //           
@@ -178,6 +211,20 @@ class QueueViewController: UIViewController, UITableViewDelegate, UITableViewDat
 //        }
         
     }
+    
+    @IBAction func logOut(_ sender: UIBarButtonItem)
+    {
+        let firebaseAuth = FIRAuth.auth()
+        do {
+            try firebaseAuth?.signOut()
+            AppState.sharedInstance.signedIn = false
+            dismiss(animated: true, completion: nil)
+        } catch let signOutError as NSError {
+            print("Error signing out: \(signOutError.localizedDescription)")
+        }
+    }
+    
+    
 
     
         
@@ -203,26 +250,28 @@ class QueueViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     
     
-// @IBAction func boxWasPressed(_ sender: UIButton)
-//    {
-//        let contentView = sender.superview
-//        let cell = contentView?.superview as! UITableViewCell
-//        let indexPath = tableView.indexPath(for: cell)
-//        //let indexPath = tableView.indexPath(for: cell)
-//        let aQuestion = requests[indexPath!.row]
-//        let isDone = true
-//        if !aQuestion
-//        {
-//            aQuestion = true
-//            sender.setImage(UIImage(named: "boxchecked"), for: .normal)
-//        }
-//        else
-//        {
-//            aQuestion.done = false
-//            sender.setImage(UIImage(named: "unchecked box"), for: .normal)
-//        }
-//    
-//    }
+ @IBAction func boxWasPressed(_ sender: UIButton)
+    {
+        let contentView = sender.superview
+        let cell = contentView?.superview as! UITableViewCell
+        let indexPath = tableView.indexPath(for: cell)
+        //let indexPath = tableView.indexPath(for: cell)
+        let aRequest = requests[indexPath!.row]
+        
+        if aRequest.done!
+        {
+            aRequest.done = false
+            // sender.setImage(UIImage(named: "box checked"), for: .normal)
+        }
+        else
+        {
+            aRequest.done = true
+            // sender.setImage(UIImage(named: "unchecked box"), for: .normal)
+        }
+        aRequest.sendEditToFirebase()
+        tableView.reloadData()
+        
+    }
 
 
 }// end class
