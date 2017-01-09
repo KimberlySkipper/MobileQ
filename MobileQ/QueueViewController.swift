@@ -82,8 +82,6 @@ class QueueViewController: UIViewController, UITableViewDelegate, UITableViewDat
         return 1
     }
 
-    
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
         return requests.count
@@ -105,6 +103,15 @@ class QueueViewController: UIViewController, UITableViewDelegate, UITableViewDat
                 cell.subjectTextField.becomeFirstResponder()
             }
         }
+        if aRequest.done!
+        {
+            aRequest.done = true
+            cell.checkboxButton.setImage(#imageLiteral(resourceName: "checked box"), for: .normal)
+        } else {
+            aRequest.done = false
+            cell.checkboxButton.setImage(#imageLiteral(resourceName: "unchecked box"), for: .normal)
+        }
+        
 
 
         
