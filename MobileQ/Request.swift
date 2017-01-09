@@ -12,7 +12,6 @@ import Firebase
 class Request
 {
     var name: String?
-//    var subject: String?
     var description: String?
     var done: Bool?
     var key: String?
@@ -27,24 +26,21 @@ class Request
     init(studentName: String, question: String, status: Bool )
     {
         self.name = studentName
-//        self.subject = subject
         self.description = question
         self.done = status
     }
     
     static func createRequestFromJsonDictionary(_ aDictionaryMadeFromFBDatabase: [String: Any]) -> Request?
    {
-    var request: Request?
-    if aDictionaryMadeFromFBDatabase.count > 0
-    {
-        let name = aDictionaryMadeFromFBDatabase["name"] as? String ?? ""
-        //let subject = aDictionaryMadeFromFBDatabase["subject"] as? String ?? ""
-        let description = aDictionaryMadeFromFBDatabase["subject"] as? String ?? ""
-        let done = aDictionaryMadeFromFBDatabase["status"] as? Bool
-        request = Request(studentName: name, question: description, status: done!)
-    }
-    return request
-    
+        var request: Request?
+        if aDictionaryMadeFromFBDatabase.count > 0
+        {
+            let name = aDictionaryMadeFromFBDatabase["name"] as? String ?? ""
+            let description = aDictionaryMadeFromFBDatabase["subject"] as? String ?? ""
+            let done = aDictionaryMadeFromFBDatabase["status"] as? Bool
+            request = Request(studentName: name, question: description, status: done!)
+        }
+        return request
     }
     
     

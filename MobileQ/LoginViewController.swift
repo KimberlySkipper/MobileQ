@@ -17,17 +17,13 @@ class LoginViewController: UIViewController
     @IBOutlet weak var RegisterButton: UIButton!
     
     
-
     override func viewDidLoad()
     {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
     }
     
     override func viewDidAppear(_ animated: Bool)
     {
-        // must call super with this method
         super.viewDidAppear(animated)
         if let user = FIRAuth.auth()?.currentUser
         {
@@ -39,7 +35,6 @@ class LoginViewController: UIViewController
     override func didReceiveMemoryWarning()
     {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
 
     @IBAction func processLogin(_ sender: Any)
@@ -56,8 +51,6 @@ class LoginViewController: UIViewController
                 }
                 print("user logged in successfully")
                 self.userIsLoggedIn(user!)
-                
-                
             }
         }
         
