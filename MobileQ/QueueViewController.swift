@@ -14,6 +14,7 @@ class QueueViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
       
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var tableViewBottomContraint: NSLayoutConstraint!
     
 
     
@@ -27,9 +28,10 @@ class QueueViewController: UIViewController, UITableViewDelegate, UITableViewDat
         title = "Mobile Q"
         
         configureDatabase()
-// NotificationCenter.default.addObserver(self, selector: #selector (keyboardWillShow(_:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
-//
-//        NotificationCenter.default.addObserver(self, selector: #selector(keyboardDidHide(_:)), name: NSNotification.Name.UIKeyboardDidHide, object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector (keyboardWillShow(_:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardDidHide(_:)), name: NSNotification.Name.UIKeyboardDidHide, object: nil)
         
         
     }
@@ -173,15 +175,15 @@ class QueueViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     //MARK: - Helper Functions
     
-//    func keyboardWillShow(_ notification: Notification)
-//    {
-//        let height = ((notification.userInfo![UIKeyboardFrameEndUserInfoKey] as! NSValue) .cgRectValue.height) + 4
-//        questionTextFieldConstraint.constant = height
-//    }
-//    
-//    func keyboardDidHide(_ notification: Notification){
-//        questionTextFieldConstraint.constant = 8.0
-//    }
+    func keyboardWillShow(_ notification: Notification)
+    {
+        let height = ((notification.userInfo![UIKeyboardFrameEndUserInfoKey] as! NSValue) .cgRectValue.height) + 4
+        tableViewBottomContraint.constant = height
+    }
+    
+    func keyboardDidHide(_ notification: Notification){
+        tableViewBottomContraint.constant = 8.0
+    }
     
 //    func sendRequest()
 //    {

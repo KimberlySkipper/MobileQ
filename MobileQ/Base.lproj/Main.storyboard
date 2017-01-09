@@ -110,6 +110,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="TRL-32-0IY" id="rTi-iW-C0B"/>
+                        <outlet property="tableViewBottomContraint" destination="y3k-tS-qzV" id="rnP-tf-OGi"/>
                         <segue destination="JyN-nS-MN6" kind="presentation" identifier="ModalLoginSeque" id="Lb7-R8-3H6"/>
                     </connections>
                 </viewController>
